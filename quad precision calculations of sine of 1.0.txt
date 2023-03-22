@@ -1,0 +1,71 @@
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ # sine value of 1.0 calculated in fortran without libquadmath0
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ ./quadtest4
+           4           8          10          16          16
+  0.841470984807896506652502321630298954      
+  0.841470984807896506652502321630298954      
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ # sine value of 1.0 calculated in gcc C programming language
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ ./quadt3
++8.41470984807896506653e-01                   
+0x1.aed548f090cee0418dd3d2138a1ep-1
++8.41470984807896506653e-01                   
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ # The above results were calculated using libquadmath0 
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ # A listing of the C language calculations for calculating the sine of 1.0 follows
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ cat quadt3.c
+#include <quadmath.h>
+#include <stdlib.h>
+#include <stdio.h>
+int main ()
+{
+__float128 r;
+int prec = 20;
+//10 GCC libquadmath
+int width = 46;
+char buf[128];
+r = 1.0q;
+r = sinq (r);
+int n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+/* Prints: +9.09297426825681695396e-01 */ 
+quadmath_snprintf (buf, sizeof buf, "%Qa", r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+/* Prints: 0x1.d18f6ead1b445dfab848188009cap-1 */
+n = quadmath_snprintf (NULL, 0, "%+-#46.*Qe", prec, r);
+if (n > -1)
+{
+char *str = malloc (n + 1);
+if (str)
+{
+quadmath_snprintf (str, n + 1, "%+-#46.*Qe", prec, r);
+printf ("%s\n", str);
+/* Prints: +9.09297426825681695396e-01 */
+}
+free (str);
+}
+return 0;
+}
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ # following is a listing of the calculation for sine of 1.0 using gfortran without using libquadmath0
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ cat quadtest4.f90
+module mykinds
+use  ISO_FORTRAN_ENV
+implicit none
+private
+public sp, dp, ep, qp1, qp2
+integer, parameter :: sp = REAL_KINDS(1)
+integer, parameter :: dp = REAL_KINDS(2)
+integer, parameter :: ep = REAL_KINDS(3)
+integer, parameter :: qp1 = REAL_KINDS(4)
+integer, parameter :: qp2 = REAL128
+end module mykinds
+
+program quadtest
+use mykinds
+implicit none
+real(qp1), parameter :: sin1 = sin(1.0_qp1)
+real(qp2), parameter :: sin2 = sin(1.0_qp2)
+write(*,*) sp,dp,ep,qp1, qp2
+write(*,*) sin1
+write(*,*) sin2
+end program quadtest
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ 
