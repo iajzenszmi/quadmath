@@ -1,0 +1,58 @@
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ gfortran quadtestfortran.f90 -lquadmath -o quadtestfortran
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ ./quadtestfortran
+           4           8          10          16
+   3.14159265358979323846264338327950280      
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ cat quadtestfortran.f90
+module mykinds
+use ISO_FORTRAN_ENV
+implicit none
+private
+public sp, dp, ep, qp
+integer, parameter :: sp = REAL_KINDS(1)
+integer, parameter :: dp = REAL_KINDS(2)
+integer, parameter :: ep = REAL_KINDS(3)
+integer, parameter :: qp = REAL_KINDS(4)
+end module mykinds
+
+program quadtest
+use mykinds
+implicit none
+real(qp), parameter :: pi = 4*atan(1.0_qp)
+
+write(*,*) sp,dp,ep,qp
+write(*,*) pi
+end program quadtest
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ sloccount quadtestfortran.f90
+Have a non-directory at the top, so creating directory top_dir
+Adding /home/ian/quadtestfortran.f90 to top_dir
+Categorizing files.
+Finding a working MD5 command....
+Found a working MD5 command.
+Computing results.
+
+
+SLOC	Directory	SLOC-by-Language (Sorted)
+17      top_dir         f90=17
+
+
+Totals grouped by language (dominant language first):
+f90:             17 (100.00%)
+
+
+
+
+Total Physical Source Lines of Code (SLOC)                = 17
+Development Effort Estimate, Person-Years (Person-Months) = 0.00 (0.03)
+ (Basic COCOMO model, Person-Months = 2.4 * (KSLOC**1.05))
+Schedule Estimate, Years (Months)                         = 0.06 (0.69)
+ (Basic COCOMO model, Months = 2.5 * (person-months**0.38))
+Estimated Average Number of Developers (Effort/Schedule)  = 0.05
+Total Estimated Cost to Develop                           = $ 375
+ (average salary = $56,286/year, overhead = 2.40).
+SLOCCount, Copyright (C) 2001-2004 David A. Wheeler
+SLOCCount is Open Source Software/Free Software, licensed under the GNU GPL.
+SLOCCount comes with ABSOLUTELY NO WARRANTY, and you are welcome to
+redistribute it under certain conditions as specified by the GNU GPL license;
+see the documentation for details.
+Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ 
