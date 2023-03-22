@@ -1,0 +1,74 @@
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ gcc quadt3.c -lquadmath -o quadsine
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ ./quadsine
++9.09297426825681695396e-01                   
+0x1.d18f6ead1b445dfab848188009cap-1
++9.09297426825681695396e-01                   
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ cat quadt3.c
+#include <quadmath.h>
+#include <stdlib.h>
+#include <stdio.h>
+int main ()
+{
+__float128 r;
+int prec = 20;
+//10 GCC libquadmath
+int width = 46;
+char buf[128];
+r = 2.0q;
+r = sinq (r);
+int n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+/* Prints: +9.09297426825681695396e-01 */ 
+quadmath_snprintf (buf, sizeof buf, "%Qa", r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+/* Prints: 0x1.d18f6ead1b445dfab848188009cap-1 */
+n = quadmath_snprintf (NULL, 0, "%+-#46.*Qe", prec, r);
+if (n > -1)
+{
+char *str = malloc (n + 1);
+if (str)
+{
+quadmath_snprintf (str, n + 1, "%+-#46.*Qe", prec, r);
+printf ("%s\n", str);
+/* Prints: +9.09297426825681695396e-01 */
+}
+free (str);
+}
+return 0;
+}
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ sloccount quadt3.c
+Have a non-directory at the top, so creating directory top_dir
+Adding /home/ian/quadt3.c to top_dir
+Categorizing files.
+Finding a working MD5 command....
+Found a working MD5 command.
+Computing results.
+
+
+SLOC	Directory	SLOC-by-Language (Sorted)
+30      top_dir         ansic=30
+
+
+Totals grouped by language (dominant language first):
+ansic:           30 (100.00%)
+
+
+
+
+Total Physical Source Lines of Code (SLOC)                = 30
+Development Effort Estimate, Person-Years (Person-Months) = 0.01 (0.06)
+ (Basic COCOMO model, Person-Months = 2.4 * (KSLOC**1.05))
+Schedule Estimate, Years (Months)                         = 0.07 (0.86)
+ (Basic COCOMO model, Months = 2.5 * (person-months**0.38))
+Estimated Average Number of Developers (Effort/Schedule)  = 0.07
+Total Estimated Cost to Develop                           = $ 680
+ (average salary = $56,286/year, overhead = 2.40).
+SLOCCount, Copyright (C) 2001-2004 David A. Wheeler
+SLOCCount is Open Source Software/Free Software, licensed under the GNU GPL.
+SLOCCount comes with ABSOLUTELY NO WARRANTY, and you are welcome to
+redistribute it under certain conditions as specified by the GNU GPL license;
+see the documentation for details.
+Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ 
