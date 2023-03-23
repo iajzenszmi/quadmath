@@ -1,0 +1,302 @@
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ cat quadfunc.c
+#include <quadmath.h>
+#include <stdlib.h>
+#include <stdio.h>
+int main(){
+//
+//__complex128: __float128-based
+//
+__float128 r;
+int prec = 20;
+//10 GCC libquadmath
+int width = 46;
+char buf[128];
+r=FLT128_MAX;
+int n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MIN;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_EPSILON;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_DENORM_MIN;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MANT_DIG;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MIN_EXP;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MAX_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_DIG;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MIN_10_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MAX_10_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+//The following mathematical constants of type __float128 are defined.
+//int n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+
+
+r=M_LOG2Eq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_LOG10Eq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_LN2q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_LN10q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_PI_2q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_PI_4q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_1_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_2_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_2_SQRTPIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_SQRT2q;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+}
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ gcc quadfunc.c -lquadmath -o quad1o
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ ./quad1o
++1.18973149535723176509e+4932                 
++3.36210314311209350626e-4932                 
++1.92592994438723585306e-34                   
++6.47517511943802511092e-4966                 
++1.13000000000000000000e+02                   
+-1.63810000000000000000e+04                   
++1.63840000000000000000e+04                   
++3.30000000000000000000e+01                   
+-4.93100000000000000000e+03                   
++4.93200000000000000000e+03                   
++1.44269504088896340736e+00                   
++4.34294481903251827651e-01                   
++6.93147180559945309417e-01                   
++2.30258509299404568402e+00                   
++3.14159265358979323846e+00                   
++1.57079632679489661923e+00                   
++7.85398163397448309616e-01                   
++3.18309886183790671538e-01                   
++6.36619772367581343076e-01                   
++1.12837916709551257390e+00                   
++1.41421356237309504880e+00                   
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ cat quadfunc.c
+#include <quadmath.h>
+#include <stdlib.h>
+#include <stdio.h>
+int main(){
+//
+//__complex128: __float128-based
+//
+__float128 r;
+int prec = 20;
+//10 GCC libquadmath
+int width = 46;
+char buf[128];
+r=FLT128_MAX;
+int n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MIN;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_EPSILON;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_DENORM_MIN;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MANT_DIG;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MIN_EXP;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MAX_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_DIG;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MIN_10_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=FLT128_MAX_10_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+//The following mathematical constants of type __float128 are defined.
+//int n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+
+
+r=M_LOG2Eq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_LOG10Eq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_LN2q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_LN10q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_PI_2q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_PI_4q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_1_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_2_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_2_SQRTPIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+
+r=M_SQRT2q;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s\n", buf);
+}
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ sloccount quadfunc.c
+Have a non-directory at the top, so creating directory top_dir
+Adding /home/ian/quadfunc.c to top_dir
+Categorizing files.
+Finding a working MD5 command....
+Found a working MD5 command.
+Computing results.
+
+
+SLOC	Directory	SLOC-by-Language (Sorted)
+93      top_dir         ansic=93
+
+
+Totals grouped by language (dominant language first):
+ansic:           93 (100.00%)
+
+
+
+
+Total Physical Source Lines of Code (SLOC)                = 93
+Development Effort Estimate, Person-Years (Person-Months) = 0.02 (0.20)
+ (Basic COCOMO model, Person-Months = 2.4 * (KSLOC**1.05))
+Schedule Estimate, Years (Months)                         = 0.11 (1.35)
+ (Basic COCOMO model, Months = 2.5 * (person-months**0.38))
+Estimated Average Number of Developers (Effort/Schedule)  = 0.15
+Total Estimated Cost to Develop                           = $ 2,231
+ (average salary = $56,286/year, overhead = 2.40).
+SLOCCount, Copyright (C) 2001-2004 David A. Wheeler
+SLOCCount is Open Source Software/Free Software, licensed under the GNU GPL.
+SLOCCount comes with ABSOLUTELY NO WARRANTY, and you are welcome to
+redistribute it under certain conditions as specified by the GNU GPL license;
+see the documentation for details.
+Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ 
+
