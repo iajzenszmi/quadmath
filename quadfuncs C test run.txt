@@ -1,0 +1,184 @@
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ gcc quadfunc.c -lquadmath -o quadf12
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ ./quadf12
+FLT128_MAX +1.18973149535723176509e+4932                 
+FLT128_MIN +3.36210314311209350626e-4932                 
+FLT128_EPSILON +1.92592994438723585306e-34                   
+FLT128_DENORM_MIN +6.47517511943802511092e-4966                 
+FLT128_MANT_DIG  +1.13000000000000000000e+02                   
+FLT128_MIN_EXP -1.63810000000000000000e+04                   
+FLT128_MAX_EXP +1.63840000000000000000e+04                   
+FLT128_DIG +3.30000000000000000000e+01                   
+FLT128_MIN_10_EXP -4.93100000000000000000e+03                   
+FLT128_MAX_10_EXP +4.93200000000000000000e+03                   
+M_LOG2Eq +1.44269504088896340736e+00                   
+M_LOG10Eq +4.34294481903251827651e-01                   
+M_LN2q +6.93147180559945309417e-01                   
+M_LN10q +2.30258509299404568402e+00                   
+M_PIq +3.14159265358979323846e+00                   
+M_PI_2q +1.57079632679489661923e+00                   
+M_PI_4q +7.85398163397448309616e-01                   
+M_PI_4q +3.18309886183790671538e-01                   
+M_2_PIq +6.36619772367581343076e-01                   
+M_2_SQRTPIq +1.12837916709551257390e+00                   
+M_SQRT2q +1.41421356237309504880e+00                   
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ cat quadfunc.c
+#include <quadmath.h>
+#include <stdlib.h>
+#include <stdio.h>
+int main(){
+//
+//__complex128: __float128-based
+//
+__float128 r;
+int prec = 20;
+//10 GCC libquadmath
+int width = 46;
+char buf[128];
+r=FLT128_MAX;
+int n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_MAX ", buf);
+
+r=FLT128_MIN;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_MIN ", buf);
+
+r=FLT128_EPSILON;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_EPSILON ", buf);
+
+r=FLT128_DENORM_MIN;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_DENORM_MIN ",buf);
+
+r=FLT128_MANT_DIG;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_MANT_DIG  ", buf);
+
+r=FLT128_MIN_EXP;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_MIN_EXP ", buf);
+
+r=FLT128_MAX_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_MAX_EXP ", buf);
+
+r=FLT128_DIG;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_DIG ", buf);
+
+r=FLT128_MIN_10_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_MIN_10_EXP ", buf);
+
+r=FLT128_MAX_10_EXP;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","FLT128_MAX_10_EXP ", buf);
+
+//The following mathematical constants of type __float128 are defined.
+//int n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+
+
+r=M_LOG2Eq;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_LOG2Eq ", buf);
+
+r=M_LOG10Eq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_LOG10Eq ", buf);
+
+r=M_LN2q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_LN2q ",buf);
+
+r=M_LN10q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_LN10q ", buf);
+
+r=M_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_PIq ", buf);
+
+r=M_PI_2q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_PI_2q ", buf);
+
+r=M_PI_4q;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_PI_4q ", buf);
+
+r=M_1_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_PI_4q ", buf);
+
+r=M_2_PIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_2_PIq ", buf);
+
+r=M_2_SQRTPIq;
+ n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_2_SQRTPIq ", buf);
+
+r=M_SQRT2q;
+n = quadmath_snprintf (buf, sizeof buf, "%+-#*.20Qe", width, r);
+if ((size_t) n < sizeof buf)
+printf ("%s%s\n","M_SQRT2q ", buf);
+}
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ sloccount quadfunc.c -lquadmath -o quadfuncs
+Have a non-directory at the top, so creating directory top_dir
+Adding /home/ian/quadfunc.c to top_dir
+basename: invalid option -- 'l'
+Try 'basename --help' for more information.
+basename: invalid option -- 'o'
+Try 'basename --help' for more information.
+WARNING!!! Not a file nor a directory (so ignored): quadfuncs
+Categorizing files.
+Finding a working MD5 command....
+Found a working MD5 command.
+Computing results.
+
+
+SLOC	Directory	SLOC-by-Language (Sorted)
+93      top_dir         ansic=93
+
+
+Totals grouped by language (dominant language first):
+ansic:           93 (100.00%)
+
+
+
+
+Total Physical Source Lines of Code (SLOC)                = 93
+Development Effort Estimate, Person-Years (Person-Months) = 0.02 (0.20)
+ (Basic COCOMO model, Person-Months = 2.4 * (KSLOC**1.05))
+Schedule Estimate, Years (Months)                         = 0.11 (1.35)
+ (Basic COCOMO model, Months = 2.5 * (person-months**0.38))
+Estimated Average Number of Developers (Effort/Schedule)  = 0.15
+Total Estimated Cost to Develop                           = $ 2,231
+ (average salary = $56,286/year, overhead = 2.40).
+SLOCCount, Copyright (C) 2001-2004 David A. Wheeler
+SLOCCount is Open Source Software/Free Software, licensed under the GNU GPL.
+SLOCCount comes with ABSOLUTELY NO WARRANTY, and you are welcome to
+redistribute it under certain conditions as specified by the GNU GPL license;
+see the documentation for details.
+Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
+ian@ian-HP-Convertible-x360-11-ab1XX:~$ 
